@@ -30,7 +30,7 @@ public class Request {
 	@OneToOne(cascade = CascadeType.ALL)
 	private Task task;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "request", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<User> users;
 
 	public Request() {
