@@ -116,7 +116,7 @@ public class Task {
 		this.users = users;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY )
+	@OneToMany(mappedBy = "task", cascade = CascadeType.ALL, fetch = FetchType.LAZY )
 	  private List<User> users;
 	
 }

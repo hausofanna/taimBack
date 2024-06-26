@@ -27,12 +27,11 @@ public class Request {
 	@DateTimeFormat(style = "dd-MM-yyyy HH:mm:ss")
 	private LocalDateTime dateTime;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<User> users;
-	
 	@OneToOne(cascade = CascadeType.ALL)
 	private Task task;
 
+	@OneToMany(mappedBy = "request", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<User> users;
 
 
 	public Request() {
