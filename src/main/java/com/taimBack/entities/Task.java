@@ -115,7 +115,7 @@ public class Task {
 		this.userList = userList;
 	}
 
-	@OneToMany(mappedBy="user", fetch = FetchType.LAZY )
+	@OneToMany(mappedBy="tasks", fetch = FetchType.LAZY )
 	  private List<User> userList;
 	
 }
