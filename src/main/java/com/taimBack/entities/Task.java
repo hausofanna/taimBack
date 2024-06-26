@@ -1,6 +1,8 @@
 package com.taimBack.entities;
 
 
+import java.util.Date;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,74 +17,84 @@ public class Task {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 //	private int userId;
-	private String taskTitle;
-	private String taskDescription;
-	private String taskCategory;
-	private String taskLocation;
-	private int taskTime;
+	private String title;
+	private String description;
+	private String category;
+	private String location;
+	private Date date;
 	private String state;
+	private int horas;
+	
+	@ManyToOne
+	@JoinColumn(name = "userId")
+	private User user;
 	
 	public Task() {
 		super();
 	}
 
-	public Task(int id, String taskTitle, String taskDescription, String taskCategory,
-			String taskLocation, int taskTime, String state, User user) {
+	public Task(int id, String title, String description, String category, String location, Date date, String state,
+			int horas, User user) {
 		super();
 		this.id = id;
-		this.taskTitle = taskTitle;
-		this.taskDescription = taskDescription;
-		this.taskCategory = taskCategory;
-		this.taskLocation = taskLocation;
-		this.taskTime = taskTime;
+		this.title = title;
+		this.description = description;
+		this.category = category;
+		this.location = location;
+		this.date = date;
 		this.state = state;
+		this.horas = horas;
 		this.user = user;
 	}
-	
-	@ManyToOne
-	@JoinColumn(name = "userId")
-	private User user;
 
-	
 
-	public String getTaskTitle() {
-		return taskTitle;
+
+	public int getId() {
+		return id;
 	}
 
-	public void setTaskTitle(String taskTitle) {
-		this.taskTitle = taskTitle;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public String getTaskDescription() {
-		return taskDescription;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setTaskDescription(String taskDescription) {
-		this.taskDescription = taskDescription;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
-	public String getTaskCategory() {
-		return taskCategory;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setTaskCategory(String taskCategory) {
-		this.taskCategory = taskCategory;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
-	public String getTaskLocation() {
-		return taskLocation;
+	public String getCategory() {
+		return category;
 	}
 
-	public void setTaskLocation(String taskLocation) {
-		this.taskLocation = taskLocation;
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
-	public int getTaskTime() {
-		return taskTime;
+	public String getLocation() {
+		return location;
 	}
 
-	public void setTaskTime(int taskTime) {
-		this.taskTime = taskTime;
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	public String getState() {
@@ -101,12 +113,7 @@ public class Task {
 		this.user = user;
 	}
 
-	public int getId() {
-		return id;
-	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
+
 	
 }
