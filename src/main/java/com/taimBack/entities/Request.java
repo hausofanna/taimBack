@@ -3,7 +3,7 @@ package com.taimBack.entities;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat; 
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -28,7 +28,7 @@ public class Request {
 	private LocalDateTime dateTime;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	private Tasks task;
+	private Task task;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<User> users;
@@ -37,7 +37,7 @@ public class Request {
 		super();
 	}
 
-	public Request(String state, LocalDateTime dateTime, Tasks task, List<User> users) {
+	public Request(String state, LocalDateTime dateTime, Task task, List<User> users) {
 		super();
 		this.state = state;
 		this.dateTime = dateTime;
@@ -45,7 +45,7 @@ public class Request {
 		this.users = users;
 	}
 
-	public Request(int id, String state, LocalDateTime dateTime, Tasks task, List<User> users) {
+	public Request(int id, String state, LocalDateTime dateTime, Task task, List<User> users) {
 		super();
 		this.id = id;
 		this.state = state; 
@@ -78,11 +78,11 @@ public class Request {
 		this.dateTime = dateTime;
 	}
 
-	public Tasks getTask() {
+	public Task getTask() {
 		return task;
 	}
 
-	public void setTask(Tasks task) {
+	public void setTask(Task task) {
 		this.task = task;
 	}
 
