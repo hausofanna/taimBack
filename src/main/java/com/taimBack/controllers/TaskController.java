@@ -33,7 +33,7 @@ public class TaskController {
 	@DeleteMapping("{id}")
 	public void deleteTask(@PathVariable("id") Integer id) {
 		Task t = new Task();
-		t.setTaskId(id);
+		t.setId(id);
 		taskRepository.delete(t);
 	}
 	
@@ -44,7 +44,7 @@ public class TaskController {
 	
 	@PutMapping("/{id}")
 	public void updateTask(@RequestBody Task task, @PathVariable("id") Integer id) {
-		task.setTaskId(id);
+		task.setId(id);
 		taskRepository.save(task);
 	}
 	

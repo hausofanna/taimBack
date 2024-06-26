@@ -12,45 +12,14 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
 @Entity
 public class User {
-
-	public User(int userId, String name, String surname,String nickname, String email, String password, Date birthday, String location,
-			String description, String habilities, String interests, int rating, String profilePict) {
-		super();
-		this.userId = userId;
-		this.name = name;
-		this.surname = surname;
-		this.email = email;
-		this.nickname = nickname;
-		this.password = password;
-		this.birthday = birthday;
-		this.location = location;
-		this.description = description;
-		this.habilities = habilities;
-		this.interests = interests;
-		this.rating = rating;
-		this.profilePict = profilePict;
-	}
 	
-	public String getNickname() {
-		return nickname;
-	}
-
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
-
-	public User() {
-		super();
-	}
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int userId;
+	private int id;
 	private String name;
 	private String surname;
 	private String email;
@@ -70,15 +39,47 @@ public class User {
 	@Nullable
 	private String profilePict;
 	
-	@OneToMany(mappedBy = "users", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Task> task;
+
+	public User(int id, String name, String surname,String nickname, String email, String password, Date birthday, String location,
+			String description, String habilities, String interests, int rating, String profilePict) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.surname = surname;
+		this.email = email;
+		this.nickname = nickname;
+		this.password = password;
+		this.birthday = birthday;
+		this.location = location;
+		this.description = description;
+		this.habilities = habilities;
+		this.interests = interests;
+		this.rating = rating;
+		this.profilePict = profilePict;
+	}
 	
-	public int getUserId() {
-		return userId;
+	public User() {
+		super();
 	}
-	public void setUserId(int userId) {
-		this.userId = userId;
+	
+	public String getNickname() {
+		return nickname;
 	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getName() {
 		return name;
 	}

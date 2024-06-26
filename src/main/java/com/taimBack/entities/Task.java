@@ -5,7 +5,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
@@ -13,8 +12,8 @@ public class Task {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int taskId;
-	private int userId;
+	private int id;
+//	private int userId;
 	private String taskTitle;
 	private String taskDescription;
 	private String taskCategory;
@@ -26,11 +25,11 @@ public class Task {
 		super();
 	}
 
-	public Task(int taskId, int userId, String taskTitle, String taskDescription, String taskCategory,
+	public Task(int id, String taskTitle, String taskDescription, String taskCategory,
 			String taskLocation, int taskTime, String state, User user) {
 		super();
-		this.taskId = taskId;
-		this.userId = userId;
+		this.id = id;
+//		this.userId = userId;
 		this.taskTitle = taskTitle;
 		this.taskDescription = taskDescription;
 		this.taskCategory = taskCategory;
@@ -41,24 +40,10 @@ public class Task {
 	}
 	
 	@ManyToOne
-	@JoinColumn(name = "userId")
+//	@JoinColumn(name = "userId")
 	private User user;
 
-	public int getTaskId() {
-		return taskId;
-	}
-
-	public void setTaskId(int taskId) {
-		this.taskId = taskId;
-	}
-
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
+	
 
 	public String getTaskTitle() {
 		return taskTitle;
@@ -114,6 +99,14 @@ public class Task {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	
