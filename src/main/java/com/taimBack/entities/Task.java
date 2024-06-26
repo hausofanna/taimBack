@@ -2,6 +2,7 @@ package com.taimBack.entities;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -17,7 +18,7 @@ public class Task {
 	}
 
 	public Task(int taskId, int userId, String taskTitle, String taskDescription, String taskCategory,
-			String taskLocation, int taskTime, String state, List<User> userList) {
+			String taskLocation, int taskTime, String state, List<User> users) {
 		super();
 		this.taskId = taskId;
 		this.userId = userId;
@@ -27,7 +28,7 @@ public class Task {
 		this.taskLocation = taskLocation;
 		this.taskTime = taskTime;
 		this.state = state;
-		this.userList = userList;
+		this.users = users;
 	}
 	
 	@Id
@@ -108,14 +109,14 @@ public class Task {
 	}
 
 	public List<User> getUserList() {
-		return userList;
+		return users;
 	}
 
-	public void setUserList(List<User> userList) {
-		this.userList = userList;
+	public void setUserList(List<User> users) {
+		this.users = users;
 	}
 
-	@OneToMany(mappedBy="tasks", fetch = FetchType.LAZY )
-	  private List<User> userList;
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY )
+	  private List<User> users;
 	
 }
