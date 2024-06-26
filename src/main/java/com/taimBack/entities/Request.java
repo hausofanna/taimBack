@@ -26,12 +26,14 @@ public class Request {
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(style = "dd-MM-yyyy HH:mm:ss")
 	private LocalDateTime dateTime;
-
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<User> users;
+	
 	@OneToOne(cascade = CascadeType.ALL)
 	private Task task;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<User> users;
+
 
 	public Request() {
 		super();

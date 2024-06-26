@@ -2,6 +2,8 @@ package com.taimBack.entities;
 
 import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import jakarta.annotation.Nullable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -58,7 +60,7 @@ public class User {
 	private String habilities;
 	@Nullable
 	private String interests;
-	@Nullable
+	@Value("${some.key:0}")
 	private int rating;
 	@Nullable
 	private String profilePict;
