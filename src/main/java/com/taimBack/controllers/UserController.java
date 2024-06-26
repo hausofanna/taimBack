@@ -32,7 +32,7 @@ public class UserController {
 	@DeleteMapping("/{id}")
 	public void deleteUser(@PathVariable("id") Integer id) {
 		User i = new User();
-		i.setUserId(id);
+		i.setId(id);
 		userRepository.delete(i);
 	}
 
@@ -44,7 +44,7 @@ public class UserController {
 
 	@PutMapping("/{id}")
 	public void updateUser(@RequestBody User user, @PathVariable("id") Integer id) {
-		user.setUserId(id);
+		user.setId(id);
 		userRepository.save(user);
 	}
 }
