@@ -2,6 +2,7 @@ package com.taimBack.entities;
 
 import java.util.Date;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,13 +11,14 @@ import jakarta.persistence.Id;
 @Entity
 public class User {
 
-	public User(int userId, String name, String surname, String email, String password, Date birthday, String location,
+	public User(int userId, String name, String surname,String nickname, String email, String password, Date birthday, String location,
 			String description, String habilities, String interests, int rating, String profilePict) {
 		super();
 		this.userId = userId;
 		this.name = name;
 		this.surname = surname;
 		this.email = email;
+		this.nickname = nickname;
 		this.password = password;
 		this.birthday = birthday;
 		this.location = location;
@@ -27,6 +29,14 @@ public class User {
 		this.profilePict = profilePict;
 	}
 	
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
 	public User() {
 		super();
 	}
@@ -37,13 +47,20 @@ public class User {
 	private String name;
 	private String surname;
 	private String email;
+	private String nickname;
 	private String password;
 	private Date birthday;
+	@Nullable
 	private String location;
+	@Nullable
 	private String description;
+	@Nullable
 	private String habilities;
+	@Nullable
 	private String interests;
+	@Nullable
 	private int rating;
+	@Nullable
 	private String profilePict;
 	
 	public int getUserId() {
