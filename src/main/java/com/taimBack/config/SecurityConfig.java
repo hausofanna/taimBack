@@ -55,7 +55,7 @@ public class SecurityConfig {
 		// Definimos que urls serán públicas
 		http.authorizeHttpRequests((requests) -> {
 			try {
-				requests.requestMatchers("/login", "/login?logout", "/logout").permitAll().anyRequest().authenticated();
+				requests.requestMatchers("/user/","/login", "/login?logout", "/logout").permitAll().anyRequest().authenticated();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
