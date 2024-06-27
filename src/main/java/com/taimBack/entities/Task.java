@@ -16,14 +16,13 @@ public class Task {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-//	private int userId;
 	private String title;
 	private String description;
 	private String category;
 	private String location;
 	private Date date;
 	private String state;
-	private int horas;
+	private int hours;
 	
 	@ManyToOne
 	@JoinColumn(name = "userId")
@@ -34,7 +33,7 @@ public class Task {
 	}
 
 	public Task(int id, String title, String description, String category, String location, Date date, String state,
-			int horas, User user) {
+			int hours, User user) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -43,18 +42,18 @@ public class Task {
 		this.location = location;
 		this.date = date;
 		this.state = state;
-		this.horas = horas;
+		this.hours = hours;
 		this.user = user;
 	}
 
 
 
-	public int getHoras() {
-		return horas;
+	public int getHours() {
+		return hours;
 	}
 
-	public void setHoras(int horas) {
-		this.horas = horas;
+	public void setHours(int hours) {
+		this.hours = hours;
 	}
 
 	public int getId() {
@@ -120,8 +119,5 @@ public class Task {
 	public void setUser(User user) {
 		this.user = user;
 	}
-
-
-
 	
 }

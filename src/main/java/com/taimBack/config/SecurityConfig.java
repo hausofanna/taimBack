@@ -50,9 +50,7 @@ public class SecurityConfig {
 
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		http.csrf(csrf -> csrf.disable()); // Deshabilitamos la protección contra ataques Cross-site request forgery
-						// para evitar su configuración en la cabecera de la peticción
-		// Definimos que urls serán públicas
+		http.csrf(csrf -> csrf.disable()); 
 		http.authorizeHttpRequests((requests) -> {
 			try {
 				requests.requestMatchers("/user/","/login", "/login?logout", "/logout").permitAll().anyRequest().authenticated();
