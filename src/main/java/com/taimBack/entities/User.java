@@ -1,9 +1,13 @@
 package com.taimBack.entities;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.annotation.Nullable;
 import jakarta.persistence.CascadeType;
@@ -13,10 +17,18 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
-public class User {
+public class User implements UserDetails {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
@@ -31,120 +43,55 @@ public class User {
 	@Nullable
 	private String description;
 	@Nullable
-	private String habilities;
+	private String skills;
 	@Nullable
 	private String interests;
 	@Value("${some.key:0}")
 	private int rating;
 	@Nullable
-	private String profilePict;
-	
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Task> task;
-
-	public User(int id, String name, String surname,String nickname, String email, String password, Date birthday, String location,
-			String description, String habilities, String interests, int rating, String profilePict) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.surname = surname;
-		this.email = email;
-		this.nickname = nickname;
-		this.password = password;
-		this.birthday = birthday;
-		this.location = location;
-		this.description = description;
-		this.habilities = habilities;
-		this.interests = interests;
-		this.rating = rating;
-		this.profilePict = profilePict;
-	}
+	private String profilePic;
+	private boolean accountNonExpired;
+	private boolean accountNonLocked;
+	private boolean credentialsNonExpired;
+	private boolean enabled;
 	
 	public User() {
 		super();
 	}
 	
-	public String getNickname() {
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Task> task;
+
+	
+	@Override
+	public Collection<? extends GrantedAuthority>getAuthorities(){
+		return new ArrayList<>();
+	}
+	
+
+	public boolean isAccountNonExpired() {
+		return accountNonExpired;
+	}
+
+	public boolean isAccountNonLocked() {
+		return accountNonLocked;
+	}
+
+
+	public boolean isCredentialsNonExpired() {
+		return credentialsNonExpired;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+	
+	public String getUsername() {
 		return nickname;
 	}
 
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getSurname() {
-		return surname;
-	}
-	public void setSurname(String surname) {
-		this.surname = surname;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
 	public String getPassword() {
 		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	public Date getBirthday() {
-		return birthday;
-	}
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
-	}
-	public String getLocation() {
-		return location;
-	}
-	public void setLocation(String location) {
-		this.location = location;
-	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	public String getHabilities() {
-		return habilities;
-	}
-	public void setHabilities(String habilities) {
-		this.habilities = habilities;
-	}
-	public String getInterests() {
-		return interests;
-	}
-	public void setInterests(String interests) {
-		this.interests = interests;
-	}
-	public int getRating() {
-		return rating;
-	}
-	public void setRating(int rating) {
-		this.rating = rating;
-	}
-	public String getProfilePict() {
-		return profilePict;
-	}
-	public void setProfilePict(String profilePict) {
-		this.profilePict = profilePict;
-	}
+	}	
 
 }

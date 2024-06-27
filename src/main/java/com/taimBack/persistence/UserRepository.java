@@ -9,5 +9,8 @@ import com.taimBack.entities.User;
 public interface UserRepository extends CrudRepository<User, Integer> {
 
 	List<User> findAll();
+
+	User findByNickname(String nickname);
+
 }
 
