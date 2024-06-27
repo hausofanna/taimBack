@@ -10,7 +10,7 @@ public interface UserRepository extends CrudRepository<User, Integer> {
 
 	List<User> findAll();
 
-	User findByNickname(String nickname);
+	User findByUserName(String username);
 
 }
 

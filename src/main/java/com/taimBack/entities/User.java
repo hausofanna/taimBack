@@ -31,7 +31,7 @@ public class User implements UserDetails {
 	private String name;
 	private String surname;
 	private String email;
-	private String nickname;
+	private String userName;
 	private String password;
 	private Date birthday;
 	@Nullable
@@ -94,14 +94,6 @@ public class User implements UserDetails {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getNickname() {
-		return nickname;
-	}
-
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
 	}
 
 	public Date getBirthday() {
@@ -209,7 +201,7 @@ public class User implements UserDetails {
 	}
 
 	public String getUsername() {
-		return nickname;
+		return userName;
 	}
 
 	public String getPassword() {
