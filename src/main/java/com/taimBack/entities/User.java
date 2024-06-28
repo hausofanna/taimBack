@@ -46,9 +46,13 @@ public class User implements UserDetails {
 	private int rating;
 	@Nullable
 	private String profilePic;
+	@Value("${some.key:true}")
 	private boolean accountNonExpired;
+	@Value("${some.key:true}")
 	private boolean accountNonLocked;
+	@Value("${some.key:true}")
 	private boolean credentialsNonExpired;
+	@Value("${some.key:true}")
 	private boolean enabled;
 	
 	public User() {
