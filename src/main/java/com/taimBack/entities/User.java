@@ -34,24 +34,34 @@ public class User implements UserDetails {
 	private String userName;
 	private String password;
 	private Date birthday;
+	
 	@Nullable
 	private String location;
+	
 	@Nullable
 	private String description;
+	
 	@Nullable
 	private String skills;
+	
 	@Nullable
 	private String interests;
-	@Value("${some.key:0}")
+	
+	@Value("${some.key:1}")
 	private int rating;
+	
 	@Nullable
 	private String profilePic;
+	
 	@Value("${some.key:true}")
 	private boolean accountNonExpired;
+	
 	@Value("${some.key:true}")
 	private boolean accountNonLocked;
+	
 	@Value("${some.key:true}")
 	private boolean credentialsNonExpired;
+	
 	@Value("${some.key:true}")
 	private boolean enabled;
 	
