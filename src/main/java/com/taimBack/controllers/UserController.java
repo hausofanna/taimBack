@@ -3,6 +3,7 @@ package com.taimBack.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -28,17 +29,21 @@ public class UserController {
 	BCryptPasswordEncoder encoder;
 
 	@PostMapping("/")
-	public void createUser(@RequestBody User user) {
+	public ResponseEntity<?> createUser(@RequestBody User user) {
 		String encryptedPassword = encoder.encode(user.getPassword());
 		user.setPassword(encryptedPassword);
 		userRepository.save(user);
+		
+		return ResponseEntity.ok().body("{\"resp\":\"Usuario creado correctamente\"}");
 	}
 
 	@DeleteMapping("/{id}")
-	public void deleteUser(@PathVariable("id") Integer id) {
+	public ResponseEntity<?> deleteUser(@PathVariable("id") Integer id) {
 		User i = new User();
 		i.setId(id);
 		userRepository.delete(i);
+		
+		return ResponseEntity.ok().body("{\"resp\":\"Usuario eliminado correctamente\"}");
 	}
 
 	@GetMapping("/")
@@ -48,8 +53,10 @@ public class UserController {
 	}
 
 	@PutMapping("/{id}")
-	public void updateUser(@RequestBody User user, @PathVariable("id") Integer id) {
+	public ResponseEntity<?> updateUser(@RequestBody User user, @PathVariable("id") Integer id) {
 		user.setId(id);
 		userRepository.save(user);
+		
+		return ResponseEntity.ok().body("{\"resp\":\"Usuario cambiado correctamente\"}");
 	}
 }

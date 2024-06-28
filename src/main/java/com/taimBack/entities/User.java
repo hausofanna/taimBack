@@ -47,23 +47,18 @@ public class User implements UserDetails {
 	@Nullable
 	private String interests;
 	
-	@Value("${some.key:1}")
 	private int rating;
 	
 	@Nullable
 	private String profilePic;
 	
-	@Value("${some.key:true}")
-	private boolean accountNonExpired;
+	private boolean accountNonExpired = true;
 	
-	@Value("${some.key:true}")
-	private boolean accountNonLocked;
+	private boolean accountNonLocked = true;
 	
-	@Value("${some.key:true}")
-	private boolean credentialsNonExpired;
+	private boolean credentialsNonExpired = true;
 	
-	@Value("${some.key:true}")
-	private boolean enabled;
+	private boolean enabled = true;
 	
 	public User() {
 		super();
