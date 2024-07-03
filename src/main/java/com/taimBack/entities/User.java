@@ -34,7 +34,7 @@ public class User implements UserDetails {
 	private String email;
 	private String username;
 	private String password;
-	private LocalDate birthday;
+//	private LocalDate birthday;
 	
 	@Nullable
 	private String location;
@@ -106,13 +106,13 @@ public class User implements UserDetails {
 		this.email = email;
 	}
 	
-	public LocalDate getBirthday() {
-		return birthday;
-	}
-
-	public void setBirthday(LocalDate birthday) {
-		this.birthday = birthday;
-	}
+//	public LocalDate getBirthday() {
+//		return birthday;
+//	}
+//
+//	public void setBirthday(LocalDate birthday) {
+//		this.birthday = birthday;
+//	}
 
 	public String getLocation() {
 		return location;
