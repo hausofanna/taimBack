@@ -1,13 +1,14 @@
 package com.taimBack.entities;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.annotation.Nullable;
 import jakarta.persistence.CascadeType;
@@ -33,7 +34,7 @@ public class User implements UserDetails {
 	private String email;
 	private String username;
 	private String password;
-	private Date birthday;
+	private LocalDate birthday;
 	
 	@Nullable
 	private String location;
@@ -104,12 +105,12 @@ public class User implements UserDetails {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-	public Date getBirthday() {
+	
+	public LocalDate getBirthday() {
 		return birthday;
 	}
 
-	public void setBirthday(Date birthday) {
+	public void setBirthday(LocalDate birthday) {
 		this.birthday = birthday;
 	}
 
@@ -193,6 +194,7 @@ public class User implements UserDetails {
 		this.enabled = enabled;
 	}
 
+	@JsonManagedReference
 	public List<Task> getTask() {
 		return task;
 	}

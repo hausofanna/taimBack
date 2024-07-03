@@ -3,6 +3,8 @@ package com.taimBack.entities;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,6 +26,7 @@ public class Task {
 	private String state;
 	private int hours;
 	
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "userId")
 	private User user;
