@@ -1,6 +1,7 @@
 package com.taimBack.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -51,6 +52,13 @@ public class UserController {
 		List<User> users = userRepository.findAll();
 		return users;
 	}
+	
+	@GetMapping("/{id}")
+	public User getUserById(@PathVariable("id") Integer id) {
+		Optional<User> users = userRepository.findById(id);
+		return users.orElse(null);
+	}
+	
 
 	@PutMapping("/{id}")
 	public ResponseEntity<?> updateUser(@RequestBody User user, @PathVariable("id") Integer id) {

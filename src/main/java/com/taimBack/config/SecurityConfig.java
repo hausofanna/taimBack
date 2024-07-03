@@ -53,7 +53,7 @@ public class SecurityConfig {
 		http.csrf(csrf -> csrf.disable()); 
 		http.authorizeHttpRequests((requests) -> {
 			try {
-				requests.requestMatchers("/tasks/", "/user/","/login", "/login?logout", "/logout").permitAll().anyRequest().authenticated();
+				requests.requestMatchers("/tasks/", "/tasks/{id}", "/user/", "/user/{id}","/login", "/login?logout", "/logout").permitAll().anyRequest().authenticated();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
