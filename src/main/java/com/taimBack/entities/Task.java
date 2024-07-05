@@ -28,7 +28,7 @@ public class Task {
 	private String state;
 	private int hours;
 	
-	@JsonBackReference
+	//@JsonBackReference
 	@ManyToOne ( fetch = FetchType.EAGER)
 	@JoinColumn(name = "userId")
 	private User user;
