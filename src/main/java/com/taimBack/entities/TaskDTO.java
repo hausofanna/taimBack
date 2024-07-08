@@ -9,7 +9,7 @@ public class TaskDTO {
 	}
 	
 	public TaskDTO(int id, String title, String description, String category, String location, Date date, String state,
-			int hours, int userId) {
+			int hours, int userId, String username) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -20,6 +20,7 @@ public class TaskDTO {
 		this.state = state;
 		this.hours = hours;
 		this.userId = userId;
+		this.username = username;
 	}
 
 
@@ -34,6 +35,7 @@ public class TaskDTO {
 	private int hours;
 
 	private int userId;
+	private String username;
 
 	public int getId() {
 		return id;
@@ -105,6 +107,14 @@ public class TaskDTO {
 
 	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 }

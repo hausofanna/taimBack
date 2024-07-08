@@ -39,6 +39,7 @@ public class TaskService {
         taskDTO.setHours(task.getHours());
         if (task.getUser() != null) {
             taskDTO.setUserId(task.getUser().getId());
+            taskDTO.setUsername(task.getUser().getUsername()); 
         }
 
         return taskDTO;
