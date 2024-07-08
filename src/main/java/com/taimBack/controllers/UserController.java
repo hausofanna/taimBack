@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.taimBack.config.UserService;
 import com.taimBack.entities.User;
+import com.taimBack.entities.UserDTO;
 import com.taimBack.persistence.UserRepository;
 
 @CrossOrigin // Para hacer peticiones desde otro servidor
@@ -28,6 +30,16 @@ public class UserController {
 
 	@Autowired
 	BCryptPasswordEncoder encoder;
+	
+	@Autowired
+	private UserService userService;
+
+	@PostMapping
+	public User createUser(@RequestBody UserDTO userDTO) {
+	   return userService.saveUser(userDTO);
+	}
+
+	
 
 	@PostMapping("/")
 	public ResponseEntity<?> createUser(@RequestBody User user) {
@@ -37,6 +49,7 @@ public class UserController {
 		
 		return ResponseEntity.ok().body("{\"resp\":\"Usuario creado correctamente\"}");
 	}
+	
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deleteUser(@PathVariable("id") Integer id) {
