@@ -28,27 +28,26 @@ public class UserController {
 	@Autowired
 	private UserRepository userRepository;
 
-	@Autowired
-	BCryptPasswordEncoder encoder;
+//	@Autowired
+//	BCryptPasswordEncoder encoder;
 	
 	@Autowired
 	private UserService userService;
 
-	@PostMapping
-	public User createUser(@RequestBody UserDTO userDTO) {
-	   return userService.saveUser(userDTO);
-	}
-
-	
-
 	@PostMapping("/")
-	public ResponseEntity<?> createUser(@RequestBody User user) {
-		String encryptedPassword = encoder.encode(user.getPassword());
-		user.setPassword(encryptedPassword);
-		userRepository.save(user);
-		
-		return ResponseEntity.ok().body("{\"resp\":\"Usuario creado correctamente\"}");
+	public ResponseEntity<?> createUser(@RequestBody UserDTO userDTO) {
+	   userService.saveUser(userDTO);
+	   return ResponseEntity.ok().body("{\"resp\":\"Usuario creado correctamente\"}");
 	}
+
+//	@PostMapping("/")
+//	public ResponseEntity<?> createUser(@RequestBody User user) {
+//		String encryptedPassword = encoder.encode(user.getPassword());
+//		user.setPassword(encryptedPassword);
+//		userRepository.save(user);
+//		
+//		return ResponseEntity.ok().body("{\"resp\":\"Usuario creado correctamente\"}");
+//	}
 	
 
 	@DeleteMapping("/{id}")
