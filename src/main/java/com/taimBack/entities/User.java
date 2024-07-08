@@ -10,6 +10,21 @@ import jakarta.persistence.Id;
 @Entity
 public class User {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int userId;
+	private String name;
+	private String surname;
+	private String email;
+	private String password;
+	private Date birthday;
+	private String location;
+	private String description;
+	private String habilities;
+	private String interests;
+	private int rating;
+	private String profilePict;
+	
 	public User(int userId, String name, String surname, String email, String password, Date birthday, String location,
 			String description, String habilities, String interests, int rating, String profilePict) {
 		super();
@@ -27,24 +42,13 @@ public class User {
 		this.profilePict = profilePict;
 	}
 	
+	public void UserGetDTO() {
+		
+	}
+	
 	public User() {
 		super();
 	}
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int userId;
-	private String name;
-	private String surname;
-	private String email;
-	private String password;
-	private Date birthday;
-	private String location;
-	private String description;
-	private String habilities;
-	private String interests;
-	private int rating;
-	private String profilePict;
 	
 	public int getUserId() {
 		return userId;
