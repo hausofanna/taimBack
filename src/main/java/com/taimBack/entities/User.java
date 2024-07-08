@@ -54,7 +54,7 @@ public class User implements UserDetails {
 	private String profilePic;
 	
 	private boolean accountNonExpired = true;
-	
+	  
 	private boolean accountNonLocked = true;
 	
 	private boolean credentialsNonExpired = true;
