@@ -2,41 +2,14 @@ package com.taimBack.entities;
 
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+public class TaskDTO {
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-
-@Entity
-public class Task {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	private String title;
-	private String description;
-	private String category;
-	private String location;
-	private Date date;
-	private String state;
-	private int hours;
-
-	@JsonBackReference
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "userId")
-	private User user;
-
-	public Task() {
+	public TaskDTO() {
 		super();
 	}
-
-	public Task(int id, String title, String description, String category, String location, Date date, String state,
-			int hours, User user) {
+	
+	public TaskDTO(int id, String title, String description, String category, String location, Date date, String state,
+			int hours, int userId) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -46,16 +19,21 @@ public class Task {
 		this.date = date;
 		this.state = state;
 		this.hours = hours;
-		this.user = user;
+		this.userId = userId;
 	}
 
-	public int getHours() {
-		return hours;
-	}
 
-	public void setHours(int hours) {
-		this.hours = hours;
-	}
+
+	private int id;
+	private String title;
+	private String description;
+	private String category;
+	private String location;
+	private Date date;
+	private String state;
+	private int hours;
+
+	private int userId;
 
 	public int getId() {
 		return id;
@@ -113,12 +91,20 @@ public class Task {
 		this.state = state;
 	}
 
-	public User getUser() {
-		return user;
+	public int getHours() {
+		return hours;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setHours(int hours) {
+		this.hours = hours;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 }

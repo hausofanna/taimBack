@@ -64,6 +64,7 @@ public class User implements UserDetails {
 		super();
 	}
 	
+	@JsonManagedReference
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Task> task;
 
