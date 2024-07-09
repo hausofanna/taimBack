@@ -24,7 +24,7 @@ public class Task {
 	private String location;
 	private Date date;
 	private String state;
-	private int hours;
+	private String hours;
 
 	@JsonBackReference
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -36,7 +36,7 @@ public class Task {
 	}
 
 	public Task(int id, String title, String description, String category, String location, Date date, String state,
-			int hours, User user) {
+			String hours, User user) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -49,11 +49,11 @@ public class Task {
 		this.user = user;
 	}
 
-	public int getHours() {
+	public String getHours() {
 		return hours;
 	}
 
-	public void setHours(int hours) {
+	public void setHours(String hours) {
 		this.hours = hours;
 	}
 
