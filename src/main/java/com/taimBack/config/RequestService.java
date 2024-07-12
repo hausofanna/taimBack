@@ -18,27 +18,21 @@ public class RequestService {
 	    private RequestRepository requestRepository;
 
 	    @Transactional(readOnly = true)
-	    public List<RequestDTO> getAllTasks() {
-	        List<Request> tasks = requestRepository.findAll();
-	        return tasks.stream()
+	    public List<RequestDTO> getAllRequests() {
+	        List<Request> request = requestRepository.findAll();
+	        return request.stream()
 	                .map(this::convertToDTO)
 	                .collect(Collectors.toList());
 	    }
 
 	    private RequestDTO convertToDTO(Request request) {
 	    	RequestDTO requestDTO = new RequestDTO();
-//	        taskDTO.setId(task.getId());
-//	        taskDTO.setTitle(task.getTitle());
-//	        taskDTO.setDescription(task.getDescription());
-//	        taskDTO.setCategory(task.getCategory());
-//	        taskDTO.setLocation(task.getLocation());
-//	        taskDTO.setDate(task.getDate());
-//	        taskDTO.setState(task.getState());
-//	        taskDTO.setHours(task.getHours());
-//	        if (task.getUser() != null) {
-//	            taskDTO.setUserId(task.getUser().getId());
-//	            taskDTO.setUsername(task.getUser().getUsername()); 
-//	        }
+	    	requestDTO.setId(request.getId());
+	    	requestDTO.setStatus(request.getStatus()); 
+	        if (request.getUser() != null) {
+	        	requestDTO.setUserId(request.getUser().getId());
+	        	requestDTO.setTaskId(request.getTask().getId()); 
+	        }
 
 	        return requestDTO;
 	    }

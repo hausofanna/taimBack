@@ -4,19 +4,19 @@ public class RequestDTO {
 	
 	private int id;
 	private int status;
-	private User user;
-	private Task task;
+	private int userId;
+	private int taskId;
 	
 	public RequestDTO() {
 		super();
 	}
 	
-	public RequestDTO(int id, int status, User user, Task task) {
+	public RequestDTO(int id, int status, int userId, int taskId) {
 		super();
 		this.id = id;
 		this.status = status;
-		this.user = user;
-		this.task = task;
+		this.userId = userId;
+		this.taskId = taskId;
 	}
 	
 	public int getId() {
@@ -31,17 +31,17 @@ public class RequestDTO {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	public User getUser() {
-		return user;
+	public int getUserId() {
+		return userId;
 	}
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
-	public Task getTask() {
-		return task;
+	public int getTaskId() {
+		return taskId;
 	}
-	public void setTask(Task task) {
-		this.task = task;
+	public void setTaskId(int taskId) {
+		this.taskId = taskId;
 	}
 	
 }
