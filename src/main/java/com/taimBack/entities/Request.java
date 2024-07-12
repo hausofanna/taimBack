@@ -28,14 +28,6 @@ public class Request {
 	@JoinColumn(name = "taskId")
 	private Task task;
 
-	public Request(int id, int status, User user, Task task) {
-		super();
-		this.id = id;
-		this.status = status;
-		this.user = user;
-		this.task = task;
-	}
-
 	public Request() {
 		super();
 	}

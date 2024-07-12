@@ -64,11 +64,16 @@ public class User implements UserDetails {
 		super();
 	}
 	
+	
+	
 	@JsonManagedReference
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Task> task;
-
 	
+	@JsonManagedReference
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Request> request;
+
 	@Override
 	public Collection<? extends GrantedAuthority>getAuthorities(){
 		return new ArrayList<>();
@@ -201,6 +206,14 @@ public class User implements UserDetails {
 
 	public void setTask(List<Task> task) {
 		this.task = task;
+	}
+
+	public List<Request> getRequest() {
+		return request;
+	}
+
+	public void setRequest(List<Request> request) {
+		this.request = request;
 	}
 
 	public static long getSerialversionuid() {

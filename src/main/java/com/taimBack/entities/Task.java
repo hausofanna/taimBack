@@ -1,9 +1,12 @@
 package com.taimBack.entities;
 
 import java.util.Date;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -11,6 +14,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Task {
@@ -30,23 +34,13 @@ public class Task {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "userId")
 	private User user;
+	
+	@JsonManagedReference
+	@OneToMany(mappedBy = "task", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Request> request;
 
 	public Task() {
 		super();
-	}
-
-	public Task(int id, String title, String description, String category, String location, Date date, String state,
-			String hours, User user) {
-		super();
-		this.id = id;
-		this.title = title;
-		this.description = description;
-		this.category = category;
-		this.location = location;
-		this.date = date;
-		this.state = state;
-		this.hours = hours;
-		this.user = user;
 	}
 
 	public String getHours() {
@@ -119,6 +113,14 @@ public class Task {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public List<Request> getRequest() {
+		return request;
+	}
+
+	public void setRequest(List<Request> request) {
+		this.request = request;
 	}
 
 }
