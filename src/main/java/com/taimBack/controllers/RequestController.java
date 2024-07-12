@@ -29,7 +29,7 @@ public class RequestController {
 		requestRepository.save(request);
 	}
 	
-	@DeleteMapping("{id}")
+	@DeleteMapping("/{id}")
 	public void deleteRequest(@PathVariable("id") Integer id) {
 		Request r = new Request();
 		r.setId(id);
