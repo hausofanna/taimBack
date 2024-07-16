@@ -1,6 +1,8 @@
 package com.taimBack.controllers;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,40 +27,50 @@ import com.taimBack.persistence.RequestRepository;
 @RestController
 @RequestMapping("/requests")
 public class RequestController {
-	
+
 	@Autowired
 	private RequestRepository requestRepository;
-	
+
 	@Autowired
 	private RequestService requestService;
-	
-	@PostMapping("/")
-	public void createRequest(@RequestBody Request request) {
-		requestRepository.save(request);
+
+	@GetMapping
+	public List<RequestDTO> getAllRequests() {
+		List<Request> requests = requestRepository.findAll();
+		return requests.stream().map(requestService::toRequestDTO).collect(Collectors.toList());
 	}
-	
-	@DeleteMapping("/{id}")
-	public void deleteRequest(@PathVariable("id") Integer id) {
-		Request r = new Request();
-		r.setId(id);
-		requestRepository.delete(r);
+
+	@GetMapping("/{id}")
+	public RequestDTO getRequestById(@PathVariable Integer id) {
+		Request request = requestRepository.findById(id).orElse(null);
+		return requestService.toRequestDTO(request);
 	}
-	
-//	@GetMapping("/")
-//	public List<Request> selectTask() {
-//	return requestRepository.findAll();
-//	}
-	
-	@GetMapping("/")
-    public ResponseEntity<List<RequestDTO>> getAllRequests() {
-        List<RequestDTO> requestDTO = requestService.getAllRequests();
-        return ResponseEntity.ok(requestDTO);
-    }
-	
+
+	@PostMapping
+	public RequestDTO createRequest(@RequestBody RequestDTO requestDTO) {
+		Request request = requestService.toRequest(requestDTO);
+		request = requestRepository.save(request);
+		return requestService.toRequestDTO(request);
+	}
+
 	@PutMapping("/{id}")
-	public void updateRequest(@RequestBody Request request, @PathVariable("id") Integer id) {
-		request.setId(id);
-		requestRepository.save(request);
+	public RequestDTO updateRequest(@PathVariable Integer id, @RequestBody RequestDTO requestDTO) {
+		Optional<Request> requestOptional = requestRepository.findById(id);
+		if (requestOptional.isPresent()) {
+			Request request = requestOptional.get();
+			request.setStatus(requestDTO.getStatus());
+			request.setUser(requestService.toRequest(requestDTO).getUser());
+			request.setTask(requestService.toRequest(requestDTO).getTask());
+			request = requestRepository.save(request);
+			return requestService.toRequestDTO(request);
+		} else {
+			return null; // O lanza una excepción personalizada
+		}
+	}
+
+	@DeleteMapping("/{id}")
+	public void deleteRequest(@PathVariable Integer id) {
+		requestRepository.deleteById(id);
 	}
 
 }

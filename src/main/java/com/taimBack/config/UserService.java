@@ -11,22 +11,37 @@ import com.taimBack.persistence.UserRepository;
 @Service
 public class UserService {
 
-    @Autowired
-    private UserRepository userRepository;
-    
-    @Autowired
+	@Autowired
 	BCryptPasswordEncoder encoder;
 
-    public User saveUser(UserDTO userDTO) {
-        User user = new User();
-        user.setName(userDTO.getName());
-        user.setSurname(userDTO.getSurname());
-        user.setUsername(userDTO.getUsername());
-        String encryptedPassword = encoder.encode(userDTO.getPassword());
-		user.setPassword(encryptedPassword);
-        user.setEmail(userDTO.getEmail());
-        return userRepository.save(user);
-    }
-    
-}
+	public UserDTO toUserDTO(User user) {
+		if (user == null) {
+			return null;
+		}
 
+		UserDTO userDTO = new UserDTO();
+		userDTO.setName(user.getName());
+		userDTO.setSurname(user.getSurname());
+		userDTO.setUsername(user.getUsername());
+		userDTO.setEmail(user.getEmail());
+		userDTO.setPassword(user.getPassword());
+
+		return userDTO;
+	}
+
+	public User toUser(UserDTO userDTO) {
+		if (userDTO == null) {
+			return null;
+		}
+
+		User user = new User();
+		user.setName(userDTO.getName());
+		user.setSurname(userDTO.getSurname());
+		user.setUsername(userDTO.getUsername());
+		String encryptedPassword = encoder.encode(userDTO.getPassword());
+		user.setPassword(encryptedPassword);
+		user.setEmail(userDTO.getEmail());
+
+		return user;
+	}
+}

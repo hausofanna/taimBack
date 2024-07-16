@@ -1,33 +1,22 @@
 package com.taimBack.config;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.taimBack.entities.Task;
 import com.taimBack.entities.TaskDTO;
-import com.taimBack.persistence.TaskRepository;
-
 
 @Service
 public class TaskService {
 
-
     @Autowired
-    private TaskRepository taskRepository;
+    private UserService userService;
 
-    @Transactional(readOnly = true)
-    public List<TaskDTO> getAllTasks() {
-        List<Task> tasks = taskRepository.findAll();
-        return tasks.stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
-    }
-
-    private TaskDTO convertToDTO(Task task) {
+    public TaskDTO toTaskDTO(Task task) {
+        if (task == null) {
+            return null;
+        }
+        
         TaskDTO taskDTO = new TaskDTO();
         taskDTO.setId(task.getId());
         taskDTO.setTitle(task.getTitle());
@@ -37,22 +26,27 @@ public class TaskService {
         taskDTO.setDate(task.getDate());
         taskDTO.setState(task.getState());
         taskDTO.setHours(task.getHours());
-        if (task.getUser() != null) {
-            taskDTO.setUserId(task.getUser().getId());
-            taskDTO.setUsername(task.getUser().getUsername()); 
-        }
+        taskDTO.setUser(userService.toUserDTO(task.getUser()));
 
         return taskDTO;
     }
-    
-    public Task saveTask(TaskDTO taskDTO) {
-    	Task task = new Task();
-    	task.setTitle(taskDTO.getTitle());
-    	task.setDescription(taskDTO.getDescription());
-    	task.setCategory(taskDTO.getCategory());
-    	task.setLocation(taskDTO.getLocation());
-    	task.setDate(taskDTO.getDate());
-    	task.setHours(taskDTO.getHours());
-    	return taskRepository.save(task);
+
+    public Task toTask(TaskDTO taskDTO) {
+        if (taskDTO == null) {
+            return null;
+        }
+
+        Task task = new Task();       
+        task.setId(taskDTO.getId());
+        task.setTitle(taskDTO.getTitle());
+        task.setDescription(taskDTO.getDescription());
+        task.setCategory(taskDTO.getCategory());
+        task.setLocation(taskDTO.getLocation());
+        task.setDate(taskDTO.getDate());
+        task.setState(taskDTO.getState());
+        task.setHours(taskDTO.getHours());
+        task.setUser(userService.toUser(taskDTO.getUser()));
+
+        return task;
     }
 }

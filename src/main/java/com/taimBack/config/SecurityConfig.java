@@ -27,6 +27,13 @@ public class SecurityConfig {
 	@Autowired
 	private UserDetailsService userDetailsService;
 
+	
+	@Bean
+	public UserDetailsService userDetailsService() {
+	    return this.userDetailsService();
+	}
+	
+	
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 

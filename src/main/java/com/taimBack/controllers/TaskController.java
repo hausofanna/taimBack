@@ -1,6 +1,7 @@
 package com.taimBack.controllers;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,40 +35,49 @@ public class TaskController {
 	@Autowired
 	private TaskService taskService;
 
-	//@PostMapping("/")
-	//public void createTask(@RequestBody Task task) {
-	//	taskRepository.save(task);
-	//}
-
-	@PostMapping("/")
-	public ResponseEntity<?> createTask(@RequestBody TaskDTO taskDTO) {
-	   taskService.saveTask(taskDTO);
-	   return ResponseEntity.ok().body("{\"resp\":\"Task creada\"}");
+	@GetMapping
+	public List<TaskDTO> getAllTasks() {
+		List<Task> tasks = taskRepository.findAll();
+		return tasks.stream().map(taskService::toTaskDTO).collect(Collectors.toList());
 	}
 
-	
-	@DeleteMapping("{id}")
-	public void deleteTask(@PathVariable("id") Integer id) {
-		Task t = new Task();
-		t.setId(id);
-		taskRepository.delete(t);
+	@GetMapping("/{id}")
+	public TaskDTO getTaskById(@PathVariable Integer id) {
+		Task task = taskRepository.findById(id).orElse(null);
+		return taskService.toTaskDTO(task);
 	}
 
-//	@GetMapping("/")
-//	public List<Task> selectTask() {
-//		return taskRepository.findAll();
-//	}
+	@PostMapping
+	public TaskDTO createTask(@RequestBody TaskDTO taskDTO) {
+		Task task = taskService.toTask(taskDTO);
+		task = taskRepository.save(task);
+		return taskService.toTaskDTO(task);
+	}
 	
-	@GetMapping("/")
-    public ResponseEntity<List<TaskDTO>> getAllTasks() {
-        List<TaskDTO> taskDTOs = taskService.getAllTasks();
-        return ResponseEntity.ok(taskDTOs);
-    }
+	 @PutMapping("/{id}")
+	    public TaskDTO updateTask(@PathVariable Integer id, @RequestBody TaskDTO taskDTO) {
+	        Optional<Task> taskOptional = taskRepository.findById(id);
+	        if (taskOptional.isPresent()) {
+	        	 Task task = taskOptional.get();
+	        	task.setId(taskDTO.getId());
+				task.setTitle(taskDTO.getTitle());
+				task.setDescription(taskDTO.getDescription());
+				task.setCategory(taskDTO.getCategory());
+				task.setLocation(taskDTO.getLocation());
+				task.setDate(taskDTO.getDate());
+				task.setState(taskDTO.getState());
+				task.setHours(taskDTO.getHours());
+				task.setUser(taskService.toTask(taskDTO).getUser());
+				task = taskRepository.save(task);
+				return taskService.toTaskDTO(task);
+	        } else {
+	            return null; // O lanza una excepción personalizada
+	        }
+	    }
 
-	@PutMapping("/{id}")
-	public void updateTask(@RequestBody Task task, @PathVariable("id") Integer id) {
-		task.setId(id);
-		taskRepository.save(task);
+	@DeleteMapping("/{id}")
+	public void deleteTask(@PathVariable Integer id) {
+		taskRepository.deleteById(id);
 	}
 
 }

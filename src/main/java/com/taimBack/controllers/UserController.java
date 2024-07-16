@@ -2,6 +2,7 @@ package com.taimBack.controllers;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -30,53 +31,45 @@ public class UserController {
 
 //	@Autowired
 //	BCryptPasswordEncoder encoder;
-	
+
 	@Autowired
 	private UserService userService;
 
-	@PostMapping("/")
-	public ResponseEntity<?> createUser(@RequestBody UserDTO userDTO) {
-	   userService.saveUser(userDTO);
-	   return ResponseEntity.ok().body("{\"resp\":\"Usuario creado correctamente\"}");
-	}
-
-//	@PostMapping("/")
-//	public ResponseEntity<?> createUser(@RequestBody User user) {
-//		String encryptedPassword = encoder.encode(user.getPassword());
-//		user.setPassword(encryptedPassword);
-//		userRepository.save(user);
-//		
-//		return ResponseEntity.ok().body("{\"resp\":\"Usuario creado correctamente\"}");
-//	}
-	
-
-	@DeleteMapping("/{id}")
-	public ResponseEntity<?> deleteUser(@PathVariable("id") Integer id) {
-		User i = new User();
-		i.setId(id);
-		userRepository.delete(i);
-		
-		return ResponseEntity.ok().body("{\"resp\":\"Usuario eliminado correctamente\"}");
-	}
-
-	@GetMapping("/")
-	public List<User> selectUser() {
+	@GetMapping
+	public List<UserDTO> getAllUsers() {
 		List<User> users = userRepository.findAll();
-		return users;
+		return users.stream().map(userService::toUserDTO).collect(Collectors.toList());
 	}
-	
+
 	@GetMapping("/{id}")
-	public User getUserById(@PathVariable("id") Integer id) {
-		Optional<User> users = userRepository.findById(id);
-		return users.orElse(null);
+	public UserDTO getUserById(@PathVariable Integer id) {
+		Optional<User> user = userRepository.findById(id);
+		return user.map(userService::toUserDTO).orElse(null);
 	}
-	
+
+	@PostMapping
+	public UserDTO createUser(@RequestBody UserDTO userDTO) {
+		User user = userService.toUser(userDTO);
+		user = userRepository.save(user);
+		return userService.toUserDTO(user);
+	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<?> updateUser(@RequestBody User user, @PathVariable("id") Integer id) {
-		user.setId(id);
-		userRepository.save(user);
-		
-		return ResponseEntity.ok().body("{\"resp\":\"Usuario cambiado correctamente\"}");
+	public UserDTO updateUser(@PathVariable Integer id, @RequestBody UserDTO userDTO) {
+		Optional<User> userOptional = userRepository.findById(id);
+		if (userOptional.isPresent()) {
+			User user = userOptional.get();
+			user.setUsername(userDTO.getUsername());
+			user.setEmail(userDTO.getEmail());
+			user = userRepository.save(user);
+			return userService.toUserDTO(user);
+		} else {
+			return null;
+		}
+	}
+
+	@DeleteMapping("/{id}")
+	public void deleteUser(@PathVariable Integer id) {
+		userRepository.deleteById(id);
 	}
 }
