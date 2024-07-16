@@ -19,6 +19,7 @@ import com.taimBack.config.TaskService;
 import com.taimBack.config.UserService;
 import com.taimBack.entities.Task;
 import com.taimBack.entities.TaskDTO;
+import com.taimBack.entities.UserDTO;
 import com.taimBack.persistence.TaskRepository;
 
 @CrossOrigin
@@ -33,11 +34,18 @@ public class TaskController {
 	@Autowired
 	private TaskService taskService;
 
+	//@PostMapping("/")
+	//public void createTask(@RequestBody Task task) {
+	//	taskRepository.save(task);
+	//}
+
 	@PostMapping("/")
-	public void createTask(@RequestBody Task task) {
-		taskRepository.save(task);
+	public ResponseEntity<?> createTask(@RequestBody TaskDTO taskDTO) {
+	   taskService.saveTask(taskDTO);
+	   return ResponseEntity.ok().body("{\"resp\":\"Task creada\"}");
 	}
 
+	
 	@DeleteMapping("{id}")
 	public void deleteTask(@PathVariable("id") Integer id) {
 		Task t = new Task();

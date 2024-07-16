@@ -44,4 +44,15 @@ public class TaskService {
 
         return taskDTO;
     }
+    
+    public Task saveTask(TaskDTO taskDTO) {
+    	Task task = new Task();
+    	task.setTitle(taskDTO.getTitle());
+    	task.setDescription(taskDTO.getDescription());
+    	task.setCategory(taskDTO.getCategory());
+    	task.setLocation(taskDTO.getLocation());
+    	task.setDate(taskDTO.getDate());
+    	task.setHours(taskDTO.getHours());
+    	return taskRepository.save(task);
+    }
 }
