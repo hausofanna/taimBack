@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.taimBack.entities.Task;
 import com.taimBack.entities.TaskDTO;
+import com.taimBack.entities.User;
 
 @Service
 public class TaskService {
@@ -45,7 +46,10 @@ public class TaskService {
         task.setDate(taskDTO.getDate());
         task.setState(taskDTO.getState());
         task.setHours(taskDTO.getHours());
-        task.setUser(userService.toUser(taskDTO.getUser()));
+        User user = new User();
+        user.setId(taskDTO.getUser().getId());
+       // User user = userService.toUser(taskDTO.getUser());
+        task.setUser(user);
 
         return task;
     }

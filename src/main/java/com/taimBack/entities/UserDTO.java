@@ -3,19 +3,36 @@ package com.taimBack.entities;
 public class UserDTO {
 	
 	private String name, surname, username, email, password;
-
-	public UserDTO(String name, String surname, String username, String email, String password) {
+private int id;
+	public UserDTO(String name, String surname, String username, String email, String password, int id) {
 		super();
+		this.id = id;
 		this.name = name;
 		this.surname = surname;
 		this.username = username;
 		this.email = email;
 		this.password = password;
 	}
+	
+	
+
+	public int getId() {
+		return id;
+	}
+
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
 
 	public UserDTO() {
 		super();
 	}
+	
+	
 
 	public String getName() {
 		return name;

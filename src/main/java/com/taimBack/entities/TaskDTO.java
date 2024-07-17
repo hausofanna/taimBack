@@ -8,8 +8,12 @@ public class TaskDTO {
 		super();
 	}
 	
-	public TaskDTO(int id, String title, String description, String category, String location, Date date, String state,
-			String hours, int userId, String username, UserDTO user) {
+	//public TaskDTO( String title, String description, String category, String location, Date date, String state,
+		//	String hours,  String username) {
+		
+		 
+		public TaskDTO(int id, String title,String description, String category, String location, String state,
+			String hours, Date date, UserDTO user) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -19,24 +23,16 @@ public class TaskDTO {
 		this.date = date;
 		this.state = state;
 		this.hours = hours;
-		this.userId = userId;
-		this.username = username;
 		this.user = user;
 	}
 
 
 
-	public UserDTO getUser() {
-		return user;
-	}
-
-	public void setUser(UserDTO user) {
-		this.user = user;
-	}
 
 
 
-	private int id;
+
+private int id;
 	private String title;
 	private String description;
 	private String category;
@@ -46,10 +42,14 @@ public class TaskDTO {
 	private String hours;
 	
 	private UserDTO user;
+	
+	public UserDTO getUser() {
+		return user;
+	}
 
-	private int userId;
-	private String username;
-
+	public void setUser(UserDTO user) {
+		this.user = user;
+	}
 	public int getId() {
 		return id;
 	}
@@ -113,21 +113,21 @@ public class TaskDTO {
 	public void setHours(String hours) {
 		this.hours = hours;
 	}
-
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
+//
+//	public int getUserId() {
+//		return userId;
+//	}
+//
+//	public void setUserId(int userId) {
+//		this.userId = userId;
+//	}
+//
+//	public String getUsername() {
+//		return username;
+//	}
+//
+//	public void setUsername(String username) {
+//		this.username = username;
+//	}
 
 }
