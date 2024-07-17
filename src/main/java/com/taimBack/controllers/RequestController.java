@@ -34,7 +34,7 @@ public class RequestController {
 	@Autowired
 	private RequestService requestService;
 
-	@GetMapping
+	@GetMapping("/")
 	public List<RequestDTO> getAllRequests() {
 		List<Request> requests = requestRepository.findAll();
 		return requests.stream().map(requestService::toRequestDTO).collect(Collectors.toList());
@@ -46,7 +46,7 @@ public class RequestController {
 		return requestService.toRequestDTO(request);
 	}
 
-	@PostMapping
+	@PostMapping("/")
 	public RequestDTO createRequest(@RequestBody RequestDTO requestDTO) {
 		Request request = requestService.toRequest(requestDTO);
 		request = requestRepository.save(request);

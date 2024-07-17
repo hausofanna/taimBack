@@ -35,7 +35,7 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	@GetMapping
+	@GetMapping("/")
 	public List<UserDTO> getAllUsers() {
 		List<User> users = userRepository.findAll();
 		return users.stream().map(userService::toUserDTO).collect(Collectors.toList());
@@ -47,7 +47,7 @@ public class UserController {
 		return user.map(userService::toUserDTO).orElse(null);
 	}
 
-	@PostMapping
+	@PostMapping("/")
 	public UserDTO createUser(@RequestBody UserDTO userDTO) {
 		User user = userService.toUser(userDTO);
 		user = userRepository.save(user);

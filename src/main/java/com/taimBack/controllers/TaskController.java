@@ -35,7 +35,7 @@ public class TaskController {
 	@Autowired
 	private TaskService taskService;
 
-	@GetMapping
+	@GetMapping("/")
 	public List<TaskDTO> getAllTasks() {
 		List<Task> tasks = taskRepository.findAll();
 		return tasks.stream().map(taskService::toTaskDTO).collect(Collectors.toList());
@@ -47,7 +47,7 @@ public class TaskController {
 		return taskService.toTaskDTO(task);
 	}
 
-	@PostMapping
+	@PostMapping("/")
 	public TaskDTO createTask(@RequestBody TaskDTO taskDTO) {
 		Task task = taskService.toTask(taskDTO);
 		task = taskRepository.save(task);
