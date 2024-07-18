@@ -4,6 +4,21 @@ import java.util.Date;
 
 public class TaskDTO {
 
+	
+
+
+private int id;
+	private String title;
+	private String description;
+	private String category;
+	private String location;
+	private Date date;
+	private String state;
+	private String hours;
+	
+	private UserDTO user;
+	
+	
 	public TaskDTO() {
 		super();
 	}
@@ -31,18 +46,6 @@ public class TaskDTO {
 
 
 
-
-private int id;
-	private String title;
-	private String description;
-	private String category;
-	private String location;
-	private Date date;
-	private String state;
-	private String hours;
-	
-	private UserDTO user;
-	
 	public UserDTO getUser() {
 		return user;
 	}

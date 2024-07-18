@@ -7,6 +7,7 @@ import com.taimBack.entities.Request;
 import com.taimBack.entities.RequestDTO;
 import com.taimBack.entities.Task;
 import com.taimBack.entities.User;
+import com.taimBack.entities.UserDTO;
 
 @Service
 public class RequestService {
@@ -33,8 +34,10 @@ public class RequestService {
 	        RequestDTO requestDTO = new RequestDTO();
 	        requestDTO.setId(request.getId());
 	        requestDTO.setStatus(request.getStatus());
-	        requestDTO.setUser(userService.toUserDTO(request.getUser()));
-	        requestDTO.setTask(taskService.toTaskDTO(request.getTask()));
+	        requestDTO.setUserId(request.getUser().getId());
+	        requestDTO.setTaskId(request.getTask().getId());
+	        //requestDTO.setUser(userService.toUserDTO(request.getUser()));
+	        //requestDTO.setTask(taskService.toTaskDTO(request.getTask()));
 
 	        return requestDTO;
 	    }
@@ -49,11 +52,11 @@ public class RequestService {
 	        request.setStatus(requestDTO.getStatus());
 	        
 	        User user = new User();
-	        user.setId(requestDTO.getUser().getId());
+	        user.setId(requestDTO.getUserId());
 	        request.setUser(user);
 	        
 	        Task task = new Task();
-	        task.setId(requestDTO.getUser().getId());
+	        task.setId(requestDTO.getUserId());
 	        request.setTask(task);
 
 	        return request;
