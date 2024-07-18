@@ -20,6 +20,7 @@ public class UserService {
 		}
 
 		UserDTO userDTO = new UserDTO();
+		userDTO.setId(user.getId());
 		userDTO.setName(user.getName());
 		userDTO.setSurname(user.getSurname());
 		userDTO.setUsername(user.getUsername());

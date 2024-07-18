@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 
 import com.taimBack.entities.Request;
 import com.taimBack.entities.RequestDTO;
+import com.taimBack.entities.Task;
+import com.taimBack.entities.User;
 
 @Service
 public class RequestService {
@@ -45,8 +47,14 @@ public class RequestService {
 	        Request request = new Request();
 	        request.setId(requestDTO.getId());
 	        request.setStatus(requestDTO.getStatus());
-	        request.setUser(userService.toUser(requestDTO.getUser()));
-	        request.setTask(taskService.toTask(requestDTO.getTask()));
+	        
+	        User user = new User();
+	        user.setId(requestDTO.getUser().getId());
+	        request.setUser(user);
+	        
+	        Task task = new Task();
+	        task.setId(requestDTO.getUser().getId());
+	        request.setTask(task);
 
 	        return request;
 	    }
