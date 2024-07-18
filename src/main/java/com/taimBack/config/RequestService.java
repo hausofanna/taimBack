@@ -56,7 +56,7 @@ public class RequestService {
 	        request.setUser(user);
 	        
 	        Task task = new Task();
-	        task.setId(requestDTO.getUserId());
+	        task.setId(requestDTO.getTaskId());
 	        request.setTask(task);
 
 	        return request;
