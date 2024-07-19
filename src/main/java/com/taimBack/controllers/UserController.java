@@ -60,6 +60,8 @@ public class UserController {
 		if (userOptional.isPresent()) {
 			User user = userOptional.get();
 			user.setUsername(userDTO.getUsername());
+			user.setName(userDTO.getName());
+			user.setSurname(userDTO.getSurname());
 			user.setEmail(userDTO.getEmail());
 			user.setLocation(userDTO.getLocation());
 			user.setDescription(userDTO.getDescription());
