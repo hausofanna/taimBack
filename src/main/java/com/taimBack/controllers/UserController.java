@@ -61,6 +61,11 @@ public class UserController {
 			User user = userOptional.get();
 			user.setUsername(userDTO.getUsername());
 			user.setEmail(userDTO.getEmail());
+			user.setLocation(userDTO.getLocation());
+			user.setDescription(userDTO.getDescription());
+			user.setSkills(userDTO.getSkills());
+			user.setInterests(userDTO.getInterests());
+			user.setRating(userDTO.getRating());
 			user = userRepository.save(user);
 			return userService.toUserDTO(user);
 		} else {
