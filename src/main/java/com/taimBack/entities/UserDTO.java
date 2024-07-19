@@ -1,10 +1,27 @@
 package com.taimBack.entities;
 
+import jakarta.annotation.Nullable;
+
 public class UserDTO {
-	
+
 	private String name, surname, username, email, password;
-private int id;
-	public UserDTO(String name, String surname, String username, String email, String password, int id) {
+	private int id;
+	@Nullable
+	private String location;
+
+	@Nullable
+	private String description;
+
+	@Nullable
+	private String skills;
+
+	@Nullable
+	private String interests;
+
+	private int rating;
+
+	public UserDTO(String name, String surname, String username, String email, String password, int id,
+			String location, String description, String skills, String interests, int rating) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -12,27 +29,24 @@ private int id;
 		this.username = username;
 		this.email = email;
 		this.password = password;
-	}
-	
-	
+		this.location = location;
+		this.description = description;
+		this.skills = skills;
+		this.interests = interests;
+		this.rating = rating;
+		}
 
 	public int getId() {
 		return id;
 	}
 
-
-
 	public void setId(int id) {
 		this.id = id;
 	}
 
-
-
 	public UserDTO() {
 		super();
 	}
-	
-	
 
 	public String getName() {
 		return name;
@@ -73,6 +87,5 @@ private int id;
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
+
 }
