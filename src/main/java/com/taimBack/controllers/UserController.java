@@ -68,6 +68,7 @@ public class UserController {
 			user.setSkills(userDTO.getSkills());
 			user.setInterests(userDTO.getInterests());
 			user.setRating(userDTO.getRating());
+			user.setProfilePic(userDTO.getProfilePic());
 			user = userRepository.save(user);
 			return userService.toUserDTO(user);
 		} else {

@@ -19,9 +19,19 @@ public class UserDTO {
 	private String interests;
 
 	private int rating;
+	
+	private String profilePic;
+
+	public String getProfilePic() {
+		return profilePic;
+	}
+
+	public void setProfilePic(String profilePic) {
+		this.profilePic = profilePic;
+	}
 
 	public UserDTO(String name, String surname, String username, String email, String password, int id,
-			String location, String description, String skills, String interests, int rating) {
+			String location, String description, String skills, String interests, int rating, String profilePic) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -34,6 +44,7 @@ public class UserDTO {
 		this.skills = skills;
 		this.interests = interests;
 		this.rating = rating;
+		this.profilePic = profilePic;
 		}
 
 	public int getId() {
