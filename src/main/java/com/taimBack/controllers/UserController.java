@@ -60,7 +60,15 @@ public class UserController {
 		if (userOptional.isPresent()) {
 			User user = userOptional.get();
 			user.setUsername(userDTO.getUsername());
+			user.setName(userDTO.getName());
+			user.setSurname(userDTO.getSurname());
 			user.setEmail(userDTO.getEmail());
+			user.setLocation(userDTO.getLocation());
+			user.setDescription(userDTO.getDescription());
+			user.setSkills(userDTO.getSkills());
+			user.setInterests(userDTO.getInterests());
+			user.setRating(userDTO.getRating());
+			user.setProfilePic(userDTO.getProfilePic());
 			user = userRepository.save(user);
 			return userService.toUserDTO(user);
 		} else {
