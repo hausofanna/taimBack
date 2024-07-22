@@ -20,8 +20,8 @@ public class UserDTO {
 
 	private int rating;
 
-	public UserDTO(String name, String surname, String username, String email, String password, int id,
-			String location, String description, String skills, String interests, int rating) {
+	public UserDTO(String name, String surname, String username, String email, String password, int id, String location,
+			String description, String skills, String interests, int rating) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -34,7 +34,47 @@ public class UserDTO {
 		this.skills = skills;
 		this.interests = interests;
 		this.rating = rating;
-		}
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getSkills() {
+		return skills;
+	}
+
+	public void setSkills(String skills) {
+		this.skills = skills;
+	}
+
+	public String getInterests() {
+		return interests;
+	}
+
+	public void setInterests(String interests) {
+		this.interests = interests;
+	}
+
+	public int getRating() {
+		return rating;
+	}
+
+	public void setRating(int rating) {
+		this.rating = rating;
+	}
 
 	public int getId() {
 		return id;
