@@ -35,7 +35,11 @@ public class RequestService {
 	        requestDTO.setId(request.getId());
 	        requestDTO.setStatus(request.getStatus());
 	        requestDTO.setUserId(request.getUser().getId());
-	        requestDTO.setTaskId(request.getTask().getId());
+	        requestDTO.setUsername(request.getUser().getUsername());
+	        requestDTO.setEmail(request.getUser().getEmail());
+	        requestDTO.setTitle(request.getTask().getTitle());
+	        requestDTO.setDescription(request.getTask().getDescription());
+	        requestDTO.setHours(request.getTask().getHours());
 	        //requestDTO.setUser(userService.toUserDTO(request.getUser()));
 	        //requestDTO.setTask(taskService.toTaskDTO(request.getTask()));
 
